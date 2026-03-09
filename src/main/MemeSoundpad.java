@@ -12,15 +12,22 @@ public class MemeSoundpad extends JFrame {
         painel.setBackground(new Color(0,27,148));
         painel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 
-        painel.add(new MemeButton("calma.jpg","Que isso?"));
-        painel.add(new MemeButton("falcon.jpg","8 Mil?"));
-        painel.add(new MemeButton("makeTheL.jpg", "Faz o L"));
+        JButton memeCalmaButton = new MemeButton("calma.jpg","Que isso?");
+
+        painel.add(memeCalmaButton);
+        painel.add(new MemeButton("falcon-8-mil.jpg","8 Mil?"));
+        painel.add(new MemeButton("faz-o-l.jpg", "Faz o L"));
         painel.add(new MemeButton("makita.jpg", "Makita"));
-        painel.add(new MemeButton("ohhhh.jpg", "Plankton - ohhhh"));
-        painel.add(new MemeButton("olha o porco.jpg", "Olha o porco"));
-        painel.add(new MemeButton("PenseNoLula.jpg", "Pense no Lula"));
-        painel.add(new MemeButton("rs.jpg", "Chaves"));
-        painel.add(new MemeButton("telefone.jpg", "Pegaram meu telefone"));
+        painel.add(new MemeButton("plankton-ohh.jpg", "Plankton - ohhhh"));
+        painel.add(new MemeButton("olha-o-porco.jpg", "Olha o porco"));
+        painel.add(new MemeButton("pense-no-lula.jpg", "Pense no Lula"));
+        painel.add(new MemeButton("risadas-chaves.jpg", "Chaves"));
+        painel.add(new MemeButton("bolsonaro-telefone.jpg", "Pegaram meu telefone"));
+
+        memeCalmaButton.addActionListener(e -> {
+            SoundPlayer.tocarSom("que-e-isso-calma.wav");
+            System.out.println("tocando som");
+        });
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(painel);
@@ -30,6 +37,5 @@ public class MemeSoundpad extends JFrame {
 
     static void main(String[] args) {
         new MemeSoundpad();
-
     }
 }
