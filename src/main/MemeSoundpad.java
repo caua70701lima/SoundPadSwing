@@ -21,9 +21,13 @@ public class MemeSoundpad extends JFrame {
     private void adicionaBotao(String img, String snd, String nam){
 
         JButton botao = new JButton(nam);
-        ImageIcon icon = new ImageIcon(getClass().getResource("/resources/images/" + img));
-        botao.setIcon(icon);
-
+        var path = getClass().getResource("/resources/images/" + img);;
+        if(path != null) {
+            ImageIcon icon = new ImageIcon(path);
+            botao.setIcon(icon);
+        } else{
+            System.out.println("Arquivo não encontrado!");
+        }
         painel.add(botao);
         // Resolver a parte do player de som ainda
     }
