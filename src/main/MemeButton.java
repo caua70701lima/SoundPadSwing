@@ -1,4 +1,5 @@
 package main;
+import javax.swing.*;
 
 public class MemeButton extends JButton {
     public MemeButton(String img, String snd, String nam) {
@@ -10,5 +11,6 @@ public class MemeButton extends JButton {
         } else {
             System.out.println("Arquivo não encontrado!");
         }
+        System.out.println(snd); // para remover erro de desuso.
     }
 }

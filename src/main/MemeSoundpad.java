@@ -10,27 +10,15 @@ public class MemeSoundpad extends JFrame {
 
         painel = new JPanel(new GridLayout(3,3,10,10));
 
-        adicionaBotao("calma.jpg","","Que isso?");
-        adicionaBotao("falcon.jpg","","8 Mil?");
-        adicionaBotao("makeTheL.jpg", "", "Faz o L");
+        painel.add(new MemeButton("calma.jpg","","Que isso?"));
+        painel.add(new MemeButton("falcon.jpg","","8 Mil?"));
+        painel.add(new MemeButton("makeTheL.jpg", "", "Faz o L"));
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(painel);
         setVisible(true);
     }
-    private void adicionaBotao(String img, String snd, String nam){
 
-        JButton botao = new JButton(nam);
-        var path = getClass().getResource("/resources/images/" + img);;
-        if(path != null) {
-            ImageIcon icon = new ImageIcon(path);
-            botao.setIcon(icon);
-        } else{
-            System.out.println("Arquivo não encontrado!");
-        }
-        painel.add(botao);
-        // Resolver a parte do player de som ainda
-    }
 
     static void main(String[] args) {
         new MemeSoundpad();
