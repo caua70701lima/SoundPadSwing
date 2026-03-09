@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MemeButton extends JButton {
-    public MemeButton(String img, String snd, String nam) {
+    public MemeButton(String img, String nam) {
         super(nam);
         var path = getClass().getResource("/resources/images/" + img);
         if(path != null) {
@@ -21,8 +21,5 @@ public class MemeButton extends JButton {
         setHorizontalTextPosition(JButton.CENTER);
         setVerticalTextPosition(JButton.BOTTOM);
         setPreferredSize(new Dimension(150,150));
-
-
-        System.out.println(snd); // para remover erro de desuso.
     }
 }
