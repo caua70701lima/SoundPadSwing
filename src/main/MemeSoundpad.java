@@ -1,6 +1,7 @@
 package main;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class MemeSoundpad extends JFrame {
     JPanel painel;
@@ -12,22 +13,23 @@ public class MemeSoundpad extends JFrame {
         painel.setBackground(new Color(0,27,148));
         painel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 
-        JButton memeCalmaButton = new MemeButton("calma.jpg","Que isso?");
+        String imagensDirectory = "src/resources/images";
+        String[] imagens = new File(imagensDirectory).list();
+        if (imagens == null) {
+            System.out.println("Memes não encontrados.");
+            return;
+        }
 
-        painel.add(memeCalmaButton);
-        painel.add(new MemeButton("falcon-8-mil.jpg","8 Mil?"));
-        painel.add(new MemeButton("faz-o-l.jpg", "Faz o L"));
-        painel.add(new MemeButton("makita.jpg", "Makita"));
-        painel.add(new MemeButton("plankton-ohh.jpg", "Plankton - ohhhh"));
-        painel.add(new MemeButton("olha-o-porco.jpg", "Olha o porco"));
-        painel.add(new MemeButton("pense-no-lula.jpg", "Pense no Lula"));
-        painel.add(new MemeButton("risadas-chaves.jpg", "Chaves"));
-        painel.add(new MemeButton("bolsonaro-telefone.jpg", "Pegaram meu telefone"));
-
-        memeCalmaButton.addActionListener(e -> {
-            SoundPlayer.tocarSom("que-e-isso-calma.wav");
-            System.out.println("tocando som");
-        });
+        for (String imagem : imagens) {
+            String nomeImagemSemExtensao = imagem.split("\\.")[0];
+            //replace all contem uma regex que percorre a string, e se o caractere for _ ou - substitui por espaço
+            String nomeImagemUI = nomeImagemSemExtensao.replaceAll("[_-]", " ");
+            JButton memeButton = new MemeButton(imagem, nomeImagemUI);
+            painel.add(memeButton);
+            memeButton.addActionListener(e -> {
+                SoundPlayer.tocarSom(nomeImagemSemExtensao + ".wav");
+            });
+        }
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(painel);
