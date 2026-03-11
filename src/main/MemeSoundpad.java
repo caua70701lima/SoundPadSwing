@@ -5,6 +5,7 @@ import java.io.File;
 
 public class MemeSoundpad extends JFrame {
     JPanel painel;
+    SoundPlayer soundPlayer = new SoundPlayer();
     public MemeSoundpad() {
         setTitle("Soundpad com memes brasileiros.");
         setSize(600, 600);
@@ -27,8 +28,9 @@ public class MemeSoundpad extends JFrame {
             JButton memeButton = new MemeButton(imagem, nomeImagemUI);
             painel.add(memeButton);
             memeButton.addActionListener(e -> {
-                SoundPlayer.tocarSom(nomeImagemSemExtensao + ".wav");
+                soundPlayer.tocarSom(nomeImagemSemExtensao + ".wav");
             });
+
         }
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
