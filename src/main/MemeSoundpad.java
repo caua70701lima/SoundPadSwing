@@ -39,7 +39,7 @@ public class MemeSoundpad extends JFrame {
     }
 
 
-    static void main(String[] args) {
+    static void main() {
         new MemeSoundpad();
     }
 }
