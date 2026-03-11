@@ -3,6 +3,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MemeButton extends JButton {
+    public static Color bgColor = Color.red;
+    public static Color bgColorHover = Color.orange;
+
     public MemeButton(String img, String nam) {
         super(nam);
         var path = getClass().getResource("/resources/images/" + img);
@@ -13,7 +16,7 @@ public class MemeButton extends JButton {
             System.out.println("Arquivo não encontrado!");
         }
 
-        setBackground(Color.red);
+        setBackground(bgColor);
         setForeground(Color.white);
         setFont(new Font("Arial", Font.BOLD, 14));
         setFocusable(false);

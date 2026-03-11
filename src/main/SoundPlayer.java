@@ -7,20 +7,25 @@ import java.util.List;
 
 import javax.sound.sampled.*;
 
+import main.events.AudioListener;
+
 public class SoundPlayer {
     private volatile List<String> sonsTocando = new LinkedList<>();
+    private AudioListener listener;
 
     public List<String> getSonsTocando() {
         return sonsTocando;
+    }
+
+    public void setListener(AudioListener listener) {
+        this.listener = listener;
     }
 
     public void tocarSom(String nomeArquivo) {
         System.out.println(Thread.activeCount());
         File somParaTocar = new File("src/resources/sounds/" + nomeArquivo);
         if (somParaTocar.exists()) {
-            System.out.println(sonsTocando);
             if (sonsTocando.contains(somParaTocar.getName())) {
-
                 System.out.println("Aguarde um meme terminar de rodar para toca-lo novamente");
                 return;
             }
@@ -40,16 +45,15 @@ public class SoundPlayer {
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
             sonsTocando.add(nomeSom);
-            System.out.println(sonsTocando);
-
+            clip.start();
+            listener.audioComecou();
             clip.addLineListener(event -> {
                 if (event.getType() == LineEvent.Type.STOP){
+                    listener.audioTerminou();
                     clip.close();
                     sonsTocando.remove(nomeSom);
                 }
-
             });
-            clip.start();
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException error) {
             error.printStackTrace();

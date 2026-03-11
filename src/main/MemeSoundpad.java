@@ -1,5 +1,8 @@
 package main;
 import javax.swing.*;
+
+import main.events.AudioListener;
+
 import java.awt.*;
 import java.io.File;
 
@@ -28,9 +31,21 @@ public class MemeSoundpad extends JFrame {
             JButton memeButton = new MemeButton(imagem, nomeImagemUI);
             painel.add(memeButton);
             memeButton.addActionListener(e -> {
-                soundPlayer.tocarSom(nomeImagemSemExtensao + ".wav");
-            });
+                String arquivoDeAudio = nomeImagemSemExtensao + ".wav";
+                soundPlayer.setListener(new AudioListener() {
+                    @Override
+                    public void audioComecou() {
+                       memeButton.setBackground(MemeButton.bgColorHover);
+                    }
 
+                    @Override
+                    public void audioTerminou() {
+                        memeButton.setBackground(MemeButton.bgColor);
+                    }
+
+                });
+                soundPlayer.tocarSom(arquivoDeAudio);
+            });
         }
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
