@@ -1,7 +1,7 @@
 package main;
 import javax.swing.*;
 
-import main.events.AudioListener;
+import main.events.BotaoEventos;
 
 import java.awt.*;
 import java.io.File;
@@ -32,7 +32,7 @@ public class MemeSoundpad extends JFrame {
             painel.add(memeButton);
             memeButton.addActionListener(e -> {
                 String arquivoDeAudio = nomeImagemSemExtensao + ".wav";
-                soundPlayer.setListener(new AudioListener() {
+                BotaoEventos botaoEventos = new BotaoEventos() {
                     @Override
                     public void audioComecou() {
                        memeButton.setBackground(MemeButton.bgColorHover);
@@ -43,8 +43,8 @@ public class MemeSoundpad extends JFrame {
                         memeButton.setBackground(MemeButton.bgColor);
                     }
 
-                });
-                soundPlayer.tocarSom(arquivoDeAudio);
+                };
+                soundPlayer.tocarSom(arquivoDeAudio, botaoEventos);
             });
         }
 

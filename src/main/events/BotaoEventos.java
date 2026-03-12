@@ -1,6 +1,6 @@
 package main.events;
 
-public interface AudioListener {
+public interface BotaoEventos {
     void audioComecou();
     void audioTerminou();
 }
