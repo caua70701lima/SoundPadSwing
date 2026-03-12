@@ -24,6 +24,7 @@ public class MemeSoundpad extends JFrame {
             return;
         }
 
+        // para cada imagem de meme, busca seu respectivo som e gera um botão para ele
         for (String imagem : imagens) {
             String nomeImagemSemExtensao = imagem.split("\\.")[0];
             //replace all contem uma regex que percorre a string, e se o caractere for _ ou - substitui por espaço
@@ -32,6 +33,7 @@ public class MemeSoundpad extends JFrame {
             painel.add(memeButton);
             memeButton.addActionListener(e -> {
                 String arquivoDeAudio = nomeImagemSemExtensao + ".wav";
+                // cria os métodos que manipulam a UI e depois envia para o tocarSom da soundPlayer
                 BotaoEventos botaoEventos = new BotaoEventos() {
                     @Override
                     public void audioComecou() {

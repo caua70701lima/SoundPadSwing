@@ -10,6 +10,7 @@ import javax.sound.sampled.*;
 import main.events.BotaoEventos;
 
 public class SoundPlayer {
+    // guarda os sons que estão tocando atualmente em uma lista
     private volatile List<String> sonsTocando = new LinkedList<>();
 
     public List<String> getSonsTocando() {
@@ -17,9 +18,9 @@ public class SoundPlayer {
     }
 
     public void tocarSom(String nomeArquivo, BotaoEventos eventos) {
-        System.out.println(Thread.activeCount());
         File somParaTocar = new File("src/resources/sounds/" + nomeArquivo);
         if (somParaTocar.exists()) {
+            // verifica se o som já está sendo tocado, se estiver não roda
             if (sonsTocando.contains(somParaTocar.getName())) {
                 System.out.println("Aguarde um meme terminar de rodar para toca-lo novamente");
                 return;
@@ -42,6 +43,7 @@ public class SoundPlayer {
             sonsTocando.add(nomeSom);
             clip.start();
             eventos.audioComecou();
+            // evento que encerra as threads criadas pelo clip e atualiza o estado do botão na UI
             clip.addLineListener(event -> {
                 if (event.getType() == LineEvent.Type.STOP){
                     eventos.audioTerminou();
@@ -50,6 +52,7 @@ public class SoundPlayer {
                 }
             });
 
+            // tratamentos dos erros
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException error) {
             error.printStackTrace();
             if (error instanceof UnsupportedAudioFileException) {
